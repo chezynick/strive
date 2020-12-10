@@ -62,6 +62,15 @@ const ProfileStyle = styled.div`
 	flex-direction: column;
 	align-items: center;
 	margin: 10%;
+	margin-top: 15%;
+	@media (max-width: 800px) {
+		margin-top: 20%;
+		margin-bottom: 20%;
+	}
+	@media (max-width: 600px) {
+		margin-top: 25%;
+		margin-bottom: 25%;
+	}
 `;
 const ProfileOverview = styled.div`
 	width: 100%;

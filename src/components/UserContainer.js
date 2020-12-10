@@ -26,18 +26,18 @@ const UserContainer = ({ users, setCurrentUser }) => {
 export default UserContainer;
 
 const UserStyle = styled.div`
-	width: 25%;
+	width: 100%;
 	height: auto;
-	top: 10%;
-	position: fixed;
-	left: 75%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	padding-top: 10%;
+	@media (max-width: 1000px) {
+		display: none;
+	}
 `;
 const AtheleteStyle = styled.div`
 	display: flex;
-	width: 100%;
+	width: 80%;
 	padding: 3% 10% 3% 10%;
 	align-items: center;
 	h4 {

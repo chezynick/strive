@@ -42,6 +42,7 @@ const ActivityStyle = styled.div`
 		color: #555555;
 		border: none;
 		text-align: left;
+		margin-top: 5%;
 		margin-left: 5%;
 		font-size: large;
 		width: 20%;
@@ -49,5 +50,13 @@ const ActivityStyle = styled.div`
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 0;
+	}
+
+	@media (max-width: 800px) {
+		button {
+			margin: auto;
+			width: 50%;
+			margin-top: 5%;
+		}
 	}
 `;

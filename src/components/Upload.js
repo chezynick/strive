@@ -90,14 +90,21 @@ const Upload = ({ currentUser, activities }) => {
 export default Upload;
 const UploadStyle = styled.div`
 	width: 80%;
-	margin: 5% 10% 0% 10%;
+	margin: 8% 10% 5% 10%;
+	@media (max-width: 800px) {
+		margin-top: 20%;
+		margin-bottom: 20%;
+	}
+	@media (max-width: 800px) {
+		margin-top: 25%;
+	}
 	form {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		justify-content: space-between;
 		align-items: center;
 		border: 1px solid #555555;
-		padding: 5% 10% 5% 10%;
+		padding: 3% 10% 3% 10%;
 		margin-bottom: 2%;
 	}
 	textarea {

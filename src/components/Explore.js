@@ -49,6 +49,16 @@ const ExploreStyle = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
+	@media (max-width: 800px) {
+		flex-direction: column;
+		margin-top: 15%;
+		margin-bottom: 15%;
+	}
+	@media (max-width: 500px) {
+		flex-direction: column;
+		margin-top: 23%;
+		margin-bottom: 20%;
+	}
 `;
 const RecipeBox = styled.div`
 	width: 30%;
@@ -59,6 +69,9 @@ const RecipeBox = styled.div`
 	justify-content: space-evenly;
 	align-items: center;
 	margin: 5%;
+	@media (max-width: 800px) {
+		width: 80%;
+	}
 	a {
 		text-decoration: none;
 		color: #555555;

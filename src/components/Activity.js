@@ -90,6 +90,10 @@ const ActiveStyle = styled.div`
 		color: #888888;
 		font-weight: 300;
 	}
+	@media (max-width: 1000px) {
+		margin: auto;
+		margin-bottom: 5%;
+	}
 `;
 const TitleStyle = styled.div`
 	width: 100%;
@@ -118,6 +122,9 @@ const HeadBoxStyle = styled.div`
 	h3 {
 		font-weight: 600;
 		margin: 0px;
+		@media (max-width: 800px) {
+			font-size: smaller;
+		}
 	}
 `;
 const StatStyleHolder = styled.div`
@@ -130,6 +137,9 @@ const StatStyle = styled.div`
 	p {
 		padding-top: 20px;
 		margin-bottom: 0;
+	}
+	@media (max-width: 800px) {
+		width: 80px;
 	}
 `;
 const CommentStyle = styled.div`

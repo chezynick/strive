@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 import Menu from './Menu';
 import ProfileMenu from './ProfileMenu';
-const Nav = ({ users, currentUser }) => {
+const Nav = ({ users, currentUser, setCurrentUser }) => {
 	return (
 		<NavStyle>
 			<Menu />
-			<ProfileMenu users={users} currentUser={currentUser} />
+			<ProfileMenu users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
 		</NavStyle>
 	);
 };
@@ -17,7 +17,7 @@ export default Nav;
 const NavStyle = styled.div`
 	display: flex;
 	width: 100%;
-	height: 50px;
+	height: auto;
 	color: #626262;
 	align-items: center;
 	justify-content: space-between;

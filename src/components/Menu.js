@@ -27,7 +27,7 @@ const Menu = () => {
 				{pathway.pathname === '/training' ? <Line /> : <Linehidden />}
 			</Link>
 			<Link to="/challenges">
-				Challenges <FontAwesomeIcon icon={faAngleDown} />
+				Profile <FontAwesomeIcon icon={faAngleDown} />
 				{pathway.pathname === '/challenges' ? <Line /> : <Linehidden />}
 			</Link>
 		</MenuStyle>
@@ -42,6 +42,9 @@ const MenuStyle = styled.div`
 	justify-content: left;
 	width: 50%;
 	padding-left: 3%;
+	@media (max-width: 800px) {
+		display: none;
+	}
 	h2 {
 		color: #fc5200;
 		font-family: 'Changa', sans-serif;

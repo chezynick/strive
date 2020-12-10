@@ -9,6 +9,7 @@ import Upload from './components/Upload';
 import Explore from './components/Explore';
 import Challenges from './components/Challenges';
 import Training from './components/Training';
+import Footer from './components/Footer';
 
 function App() {
 	//state for users and activities
@@ -62,7 +63,7 @@ function App() {
 	return (
 		<HashRouter basename="/">
 			<div className="App">
-				<Nav users={users} currentUser={currentUser} />
+				<Nav users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
 				<Switch>
 					<Route
 						exact
@@ -78,7 +79,10 @@ function App() {
 						)}
 					/>
 					<Route path="/explore" render={() => <Explore things={things} />} />
-					<Route path="/challenges" render={() => <Challenges />} />
+					<Route
+						path="/challenges"
+						render={() => <Challenges currentUser={currentUser} activities={activities} />}
+					/>
 					<Route path="/training" render={() => <Training />} />
 					<Route
 						exact
@@ -86,6 +90,7 @@ function App() {
 						render={() => <Upload currentUser={currentUser} activities={activities} />}
 					/>
 				</Switch>
+				<Footer />
 			</div>
 		</HashRouter>
 	);

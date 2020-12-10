@@ -8,7 +8,7 @@ const DetailBox = ({ detailActivity, things }) => {
 	return (
 		<DetailStyle>
 			<HeaderBox>
-				<h1> {detailActivity[0].user} - </h1>
+				<h1> {detailActivity[0].user} </h1>
 				{detailActivity[0].type ? (
 					<FontAwesomeIcon size="2x" icon={faBiking} />
 				) : (
@@ -47,7 +47,7 @@ const DetailStyle = styled.div`
 	z-index: 20;
 	height: 100%;
 	background-color: white;
-	top: 50px;
+	top: 80px;
 	left: 0;
 	h1 {
 		padding-left: 5%;
@@ -59,9 +59,12 @@ const HeaderBox = styled.div`
 	height: 50px;
 	background-color: #eeeeee;
 	display: flex;
+	justify-content: space-evenly;
 	align-items: center;
-
 	border: 1px lightgray solid;
+	@media (max-width: 1000px) {
+		height: auto;
+	}
 `;
 const MainBox = styled.div`
 	width: 80%;
@@ -72,25 +75,42 @@ const MainBox = styled.div`
 	margin-bottom: 5%;
 	display: flex;
 	flex-wrap: wrap;
-	img {
-		width: 90%;
-		margin: 5%;
-		height: auto;
+	@media (max-width: 1000px) {
+		flex-direction: column;
+		justify-content: center;
+		margin-bottom: 10%;
+		padding-bottom: 10%;
 	}
 `;
+
 const ProfileBox = styled.div`
 	width: 50%;
 	height: 200px;
 	padding: 0;
 	border-bottom: 1px lightgray solid;
 	border-right: 1px lightgray solid;
-
 	display: flex;
-
+	@media (max-width: 1000px) {
+		width: 100%;
+	}
+	@media (max-width: 600px) {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		h1 {
+			font-size: large;
+			text-align: center;
+		}
+		img {
+			width: 30px;
+			height: 30px;
+		}
+	}
 	img {
-		width: 90px;
-		height: 90px;
+		width: 10vh;
+		height: 10vh;
 		border-radius: 50%;
+		margin-top: 5%;
 	}
 `;
 const StatBox = styled.div`
@@ -109,4 +129,7 @@ const StatContainer = styled.div`
 	width: 49%;
 	height: 200px;
 	border-bottom: 1px lightgray solid;
+	@media (max-width: 1000px) {
+		width: 100%;
+	}
 `;

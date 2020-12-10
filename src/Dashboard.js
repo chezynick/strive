@@ -25,4 +25,11 @@ const DashboardStyle = styled.div`
 	width: 100%;
 	height: auto;
 	margin-top: 50px;
+	@media (max-width: 1000px) {
+		grid-template-columns: 2fr 3fr;
+	}
+	@media (max-width: 800px) {
+		display: flex;
+		flex-direction: column-reverse;
+	}
 `;

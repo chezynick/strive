@@ -17,7 +17,10 @@ const DetailBox = ({ detailActivity, things, detailDisplay, setDetailDisplay }) 
 			</HeaderBox>
 			<MainBox>
 				<ProfileBox>
-					<img src={detailActivity[0].userImage} alt="" />
+					<PicBox>
+						<img src={detailActivity[0].userImage} alt="" />
+					</PicBox>
+
 					<h1>{detailActivity[0].title}</h1>
 				</ProfileBox>
 				<StatContainer>
@@ -85,11 +88,17 @@ const MainBox = styled.div`
 
 const ProfileBox = styled.div`
 	width: 50%;
+
 	height: 200px;
 	padding: 0;
 	border-bottom: 1px lightgray solid;
 	border-right: 1px lightgray solid;
 	display: flex;
+	align-items: center;
+	h1 {
+		margin: 0% 5% 0% 5%;
+		padding: 0;
+	}
 	@media (max-width: 1000px) {
 		width: 100%;
 	}
@@ -101,16 +110,17 @@ const ProfileBox = styled.div`
 			font-size: large;
 			text-align: center;
 		}
-		img {
-			width: 30px;
-			height: 30px;
-		}
 	}
+`;
+const PicBox = styled.div`
+	width: 30%;
+	height: auto;
+	margin: auto;
 	img {
-		width: 10vh;
-		height: 10vh;
+		margin: 10%;
+		width: 80%;
+		height: 80%;
 		border-radius: 50%;
-		margin-top: 5%;
 	}
 `;
 const StatBox = styled.div`

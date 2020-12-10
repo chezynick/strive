@@ -22,6 +22,7 @@ function App() {
 	const ref = firebase.firestore().collection('users');
 	const data = firebase.firestore().collection('activities');
 	const thing = firebase.firestore().collection('things');
+
 	const getUsers = () => {
 		ref.onSnapshot((querySnapshot) => {
 			const items = [];
@@ -37,7 +38,9 @@ function App() {
 		data.onSnapshot((querySnapshot) => {
 			const items = [];
 			querySnapshot.forEach((doc) => {
-				items.push(doc.data());
+				const actObj = doc.data();
+				actObj.id = doc.id;
+				items.push(actObj);
 			});
 
 			items.sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -64,6 +67,7 @@ function App() {
 		<HashRouter basename="/">
 			<div className="App">
 				<Nav users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+
 				<Switch>
 					<Route
 						exact

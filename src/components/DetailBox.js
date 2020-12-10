@@ -4,9 +4,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Weather from './Weather';
 
-const DetailBox = ({ detailActivity, things }) => {
+const DetailBox = ({ detailActivity, things, detailDisplay, setDetailDisplay }) => {
 	return (
-		<DetailStyle>
+		<DetailStyle onClick={() => setDetailDisplay(!detailDisplay)}>
 			<HeaderBox>
 				<h1> {detailActivity[0].user} </h1>
 				{detailActivity[0].type ? (

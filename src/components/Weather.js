@@ -15,7 +15,7 @@ const Weather = ({ city, things }) => {
 				`https://api.openweathermap.org/data/2.5/weather?q=` + city + `&units=metric&APPID=` + key
 			);
 			const weather = await response.json();
-			console.log(weather);
+
 			setCurrentTemp(weather.main.temp.toFixed(0));
 			setCurrentWind(weather.wind.speed.toFixed(0));
 			setClouds(weather.clouds.all);

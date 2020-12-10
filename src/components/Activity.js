@@ -4,18 +4,49 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBiking, faRunning, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import DetailBox from './DetailBox';
+import firebase from '../firebase';
 
 const Activity = ({ activity, activities, things }) => {
 	const [detailDisplay, setDetailDisplay] = useState(false);
 	const [detailActivity, setDetailActivity] = useState();
-	const clickHandler = (id) => {
-		const detail = activities.filter((a) => a.id === id);
+	const [commentDisplay, setCommentDisplay] = useState(false);
+	const [comment, setComment] = useState('');
+	//handler for adding comments
+	const addComment = (activity) => {
+		firebase
+			.firestore()
+			.collection('activities')
+			.doc(activity.id)
+			.set(
+				{
+					comments: [...activity.comments, comment],
+				},
+				{ merge: true }
+			)
+			.then(function () {
+				setComment('');
+				setCommentDisplay(!commentDisplay);
+			})
+			.catch(function (error) {
+				console.error('Error writing document: ', error);
+			});
+	};
+	//handler for adding likes
+	const displayComment = () => {
+		setCommentDisplay(!commentDisplay);
+	};
+	const makeComment = (e) => {
+		setComment(e.target.value);
+	};
+	const clickHandler = (title) => {
+		const detail = activities.filter((a) => a.title === title);
 		setDetailActivity(detail);
+		console.log(detail);
 		setDetailDisplay(!detailDisplay);
 	};
 	if (activity) {
 		return (
-			<ActiveStyle key={activity.id} onClick={() => clickHandler(activity.id)}>
+			<ActiveStyle key={activity.id}>
 				<TitleStyle>
 					<IconStyle>
 						<img src={activity.userImage} alt="nick pic" />
@@ -26,7 +57,7 @@ const Activity = ({ activity, activities, things }) => {
 							<FontAwesomeIcon size="2x" icon={faRunning} />
 						)}
 					</IconStyle>
-					<HeadBoxStyle>
+					<HeadBoxStyle onClick={() => clickHandler(activity.title)}>
 						<h3> {activity.user} </h3>
 						<p>{activity.date}</p>
 						<h3>{activity.title}</h3>
@@ -57,14 +88,37 @@ const Activity = ({ activity, activities, things }) => {
 							<FontAwesomeIcon icon={faThumbsUp} color="#555555" />
 						</IconSquare>
 						<IconSquare>
-							<FontAwesomeIcon icon={faCommentAlt} />
+							<FontAwesomeIcon icon={faCommentAlt} onClick={() => displayComment(activity)} />
 						</IconSquare>
 					</IconHolder>
+					{commentDisplay ? (
+						<FormStyle>
+							<textarea value={comment} onChange={makeComment}></textarea>
+							<button
+								onClick={() => {
+									addComment(activity);
+								}}
+							>
+								Add
+							</button>
+						</FormStyle>
+					) : (
+						''
+					)}
 					{activity.comments.map((comm) => (
-						<li key={comm}>{comm}</li>
+						<p key={comm}>{comm}</p>
 					))}
 				</CommentStyle>
-				{detailDisplay ? <DetailBox detailActivity={detailActivity} things={things} /> : ''}
+				{detailDisplay ? (
+					<DetailBox
+						detailActivity={detailActivity}
+						things={things}
+						setDetailDisplay={setDetailDisplay}
+						detailDisplay={detailDisplay}
+					/>
+				) : (
+					''
+				)}
 			</ActiveStyle>
 		);
 	} else {
@@ -167,4 +221,18 @@ const IconSquare = styled.div`
 	background: #dddddd;
 
 	margin-left: 10px;
+`;
+const FormStyle = styled.div`
+	width: 100%;
+	display: flex;
+	textarea {
+		width: 60%;
+	}
+	button {
+		background-color: #fc5200;
+		color: white;
+		border: none;
+		padding: 5px 10px 5px 10px;
+		border-radius: 0.3rem;
+	}
 `;

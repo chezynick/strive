@@ -38,23 +38,20 @@ const Upload = ({ currentUser, activities }) => {
 			let path = `/`;
 			History.push(path);
 		} else {
-			firebase
-				.firestore()
-				.collection('activities')
-				.add({
-					user: currentUser.name,
-					userImage: currentUser.image,
-					likes: 0,
-					time: activeTime,
-					distance: activeDistance,
-					title: activeTitle,
-					date: todaysDate,
-					location: activeLocation,
-					comments: [],
-					type: activityType,
-					id: activities.length + 1,
-					images: activityImages,
-				});
+			firebase.firestore().collection('activities').add({
+				user: currentUser.name,
+				userImage: currentUser.image,
+				likes: 0,
+				time: activeTime,
+				distance: activeDistance,
+				title: activeTitle,
+				date: todaysDate,
+				location: activeLocation,
+				comments: [],
+				type: activityType,
+
+				images: activityImages,
+			});
 			let path = `/`;
 			History.push(path);
 		}

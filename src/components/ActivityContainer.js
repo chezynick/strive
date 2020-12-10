@@ -18,12 +18,24 @@ const ActivityContainer = ({ activities, currentUser, things }) => {
 
 			{buttonText
 				? activeArr.map((activity) => (
-						<Activity activity={activity} key={activity.id} activities={activities} things={things} />
+						<Activity
+							activity={activity}
+							key={activity.id}
+							activities={activities}
+							things={things}
+							currentUser={currentUser}
+						/>
 				  ))
 				: activeArr
 						.filter((a) => a.user === currentUser.name)
 						.map((activity) => (
-							<Activity activity={activity} key={activity.id} things={things} activities={activities} />
+							<Activity
+								activity={activity}
+								key={activity.id}
+								things={things}
+								activities={activities}
+								currentUser={currentUser}
+							/>
 						))}
 		</ActivityStyle>
 	);

@@ -6,7 +6,7 @@ import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import DetailBox from './DetailBox';
 import firebase from '../firebase';
 
-const Activity = ({ activity, activities, things }) => {
+const Activity = ({ activity, activities, things, currentUser }) => {
 	//add state on this level for displaying detail and comment boxes
 	const [detailDisplay, setDetailDisplay] = useState(false);
 	const [detailActivity, setDetailActivity] = useState();
@@ -15,19 +15,23 @@ const Activity = ({ activity, activities, things }) => {
 
 	//handler for likes
 	const likesHandler = (activity) => {
-		firebase
-			.firestore()
-			.collection('activities')
-			.doc(activity.id)
-			.set(
-				{
-					likes: activity.likes + 1,
-				},
-				{ merge: true }
-			)
-			.catch(function (error) {
-				console.error('Error writing document: ', error);
-			});
+		if (currentUser.name === activity.user) {
+			return;
+		} else {
+			firebase
+				.firestore()
+				.collection('activities')
+				.doc(activity.id)
+				.set(
+					{
+						likes: activity.likes + 1,
+					},
+					{ merge: true }
+				)
+				.catch(function (error) {
+					console.error('Error writing document: ', error);
+				});
+		}
 	};
 
 	//handler for adding comments

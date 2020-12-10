@@ -7,10 +7,36 @@ import DetailBox from './DetailBox';
 import firebase from '../firebase';
 
 const Activity = ({ activity, activities, things }) => {
+	//add state on this level for displaying detail and comment boxes
 	const [detailDisplay, setDetailDisplay] = useState(false);
 	const [detailActivity, setDetailActivity] = useState();
 	const [commentDisplay, setCommentDisplay] = useState(false);
 	const [comment, setComment] = useState('');
+
+	//handler for likes
+	const likesHandler = (activity) => {
+		firebase
+			.firestore()
+			.collection('activities')
+			.doc(activity.id)
+			.set(
+				{
+					likes: activity.likes + 1,
+				},
+				{ merge: true }
+			)
+			.catch(function (error) {
+				console.error('Error writing document: ', error);
+			});
+	};
+
+	//handler for adding comments
+	const displayComment = () => {
+		setCommentDisplay(!commentDisplay);
+	};
+	const makeComment = (e) => {
+		setComment(e.target.value);
+	};
 	//handler for adding comments
 	const addComment = (activity) => {
 		firebase
@@ -31,13 +57,7 @@ const Activity = ({ activity, activities, things }) => {
 				console.error('Error writing document: ', error);
 			});
 	};
-	//handler for adding likes
-	const displayComment = () => {
-		setCommentDisplay(!commentDisplay);
-	};
-	const makeComment = (e) => {
-		setComment(e.target.value);
-	};
+	//handler to display details box
 	const clickHandler = (title) => {
 		const detail = activities.filter((a) => a.title === title);
 		setDetailActivity(detail);
@@ -85,7 +105,13 @@ const Activity = ({ activity, activities, things }) => {
 						<p>{activity.comments.length} Comments</p>
 						<p></p>
 						<IconSquare>
-							<FontAwesomeIcon icon={faThumbsUp} color="#555555" />
+							<FontAwesomeIcon
+								icon={faThumbsUp}
+								color="#555555"
+								onClick={() => {
+									likesHandler(activity);
+								}}
+							/>
 						</IconSquare>
 						<IconSquare>
 							<FontAwesomeIcon icon={faCommentAlt} onClick={() => displayComment(activity)} />

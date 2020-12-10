@@ -43,13 +43,14 @@ const Activity = ({ activity, activities, things, currentUser }) => {
 	};
 	//handler for adding comments
 	const addComment = (activity) => {
+		const thisComment = currentUser.name + ' - ' + comment;
 		firebase
 			.firestore()
 			.collection('activities')
 			.doc(activity.id)
 			.set(
 				{
-					comments: [...activity.comments, comment],
+					comments: [...activity.comments, thisComment],
 				},
 				{ merge: true }
 			)

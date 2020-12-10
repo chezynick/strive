@@ -23,7 +23,7 @@ const ProfileSection = ({ currentUser, activities }) => {
 		} else if (resultArr.length === 0) {
 			return totalDistance;
 		} else if (resultArr.length > 1) {
-			const atheleteDistance = resultArr.reduce((cum, next) => cum.distance + next.distance);
+			const atheleteDistance = resultArr.reduce((cum, next) => Number(cum.distance) + Number(next.distance));
 			setTotalDistance(atheleteDistance);
 		}
 	}, [currentUser]);

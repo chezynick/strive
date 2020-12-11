@@ -44,7 +44,7 @@ const Upload = ({ currentUser }) => {
 			setErrors({
 				elevationError: '',
 			});
-			setActiveElevation(e.target.value);
+			setActiveElevation(Number(e.target.value));
 		}
 	};
 	const timeHandler = (e) => {
@@ -56,7 +56,7 @@ const Upload = ({ currentUser }) => {
 			setErrors({
 				timeError: '',
 			});
-			setActiveTime(e.target.value);
+			setActiveTime(Number(e.target.value));
 		}
 	};
 	const distanceHandler = (e) => {
@@ -68,7 +68,7 @@ const Upload = ({ currentUser }) => {
 			setErrors({
 				distanceError: '',
 			});
-			setActiveDistance(e.target.value);
+			setActiveDistance(Number(e.target.value));
 		}
 	};
 	const imageHandler = (e) => {

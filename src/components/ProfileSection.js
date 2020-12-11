@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBiking, faRunning } from '@fortawesome/free-solid-svg-icons';
+import { parse } from '@fortawesome/fontawesome-svg-core';
 
 const ProfileSection = ({ currentUser, activities }) => {
 	const [totalActive, setTotalActive] = useState([]);
@@ -20,10 +21,9 @@ const ProfileSection = ({ currentUser, activities }) => {
 			const atheleteDistance = resultArr[0].distance;
 			setTotalDistance(atheleteDistance);
 			//returns array of more than 1
-		} else if (resultArr.length === 0) {
-			return totalDistance;
 		} else if (resultArr.length > 1) {
-			const atheleteDistance = resultArr.reduce((cum, next) => Number(cum.distance) + Number(next.distance));
+			const atheleteDistance = resultArr.reduce((cum, next) => cum.distance + next.distance);
+
 			setTotalDistance(atheleteDistance);
 		}
 	}, [currentUser]);

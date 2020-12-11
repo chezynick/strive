@@ -3,10 +3,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
 import Weather from './Weather';
+import firebase from '../firebase';
 
-const DetailBox = ({ detailActivity, things, detailDisplay, setDetailDisplay }) => {
+const DetailBox = ({ detailActivity, things, detailDisplay, setDetailDisplay, currentUser }) => {
+	const deleteHandler = (activity) => {
+		if (currentUser.name !== activity.user) {
+			return;
+		} else {
+			firebase
+				.firestore()
+				.collection('activities')
+				.doc(activity.id)
+				.delete()
+				.catch(function (error) {
+					console.error('Error writing document: ', error);
+				});
+		}
+	};
 	return (
-		<DetailStyle onClick={() => setDetailDisplay(!detailDisplay)}>
+		<DetailStyle>
 			<HeaderBox>
 				<h1> {detailActivity[0].user} </h1>
 				{detailActivity[0].type ? (
@@ -36,7 +51,9 @@ const DetailBox = ({ detailActivity, things, detailDisplay, setDetailDisplay }) 
 					</StatBox>
 					<Weather city={detailActivity[0].location} things={things} />
 				</StatContainer>
-				<img src={detailActivity[0].images} alt="userpic" />
+				<p>To close box click image</p>
+				<img src={detailActivity[0].images} alt="userpic" onClick={() => setDetailDisplay(!detailDisplay)} />
+				<button onClick={() => deleteHandler(detailActivity[0])}>Delete Activity</button>
 			</MainBox>
 		</DetailStyle>
 	);
@@ -52,8 +69,19 @@ const DetailStyle = styled.div`
 	background-color: white;
 	top: 80px;
 	left: 0;
+	p {
+		margin: 5px auto 5px auto;
+	}
 	h1 {
 		padding-left: 5%;
+	}
+	button {
+		background-color: #fc5200;
+		color: white;
+		border: none;
+		padding: 5px 10px 5px 10px;
+		border-radius: 0.3rem;
+		margin: 20px auto 0px auto;
 	}
 `;
 const HeaderBox = styled.div`
@@ -76,6 +104,7 @@ const MainBox = styled.div`
 	border: 1px lightgray solid;
 	margin-left: 10%;
 	margin-bottom: 5%;
+	padding-bottom: 5%;
 	display: flex;
 	flex-wrap: wrap;
 	@media (max-width: 1000px) {
@@ -118,8 +147,8 @@ const PicBox = styled.div`
 	margin: auto;
 	img {
 		margin: 10%;
-		width: 80%;
-		height: 80%;
+		width: 80px;
+		height: 80px;
 		border-radius: 50%;
 	}
 `;

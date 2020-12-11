@@ -66,7 +66,7 @@ const Activity = ({ activity, activities, things, currentUser }) => {
 	const clickHandler = (title) => {
 		const detail = activities.filter((a) => a.title === title);
 		setDetailActivity(detail);
-		console.log(detail);
+
 		setDetailDisplay(!detailDisplay);
 	};
 	if (activity) {
@@ -146,6 +146,7 @@ const Activity = ({ activity, activities, things, currentUser }) => {
 						things={things}
 						setDetailDisplay={setDetailDisplay}
 						detailDisplay={detailDisplay}
+						currentUser={currentUser}
 					/>
 				) : (
 					''

@@ -16,16 +16,8 @@ const ProfileSection = ({ currentUser, activities }) => {
 		setTotalActive(result);
 		//create array to determine current users total distance covered
 		const resultArr = Array.from(result);
-		//if returns only 1 object
-		if (resultArr.length === 1) {
-			const atheleteDistance = resultArr[0].distance;
-			setTotalDistance(atheleteDistance);
-			//returns array of more than 1
-		} else if (resultArr.length > 1) {
-			const atheleteDistance = resultArr.reduce((cum, next) => cum.distance + next.distance);
-
-			setTotalDistance(atheleteDistance);
-		}
+		const atheleteDistance = resultArr.reduce((cum, next) => cum + next.distance, 0);
+		setTotalDistance(atheleteDistance);
 	}, [currentUser]);
 
 	return (
